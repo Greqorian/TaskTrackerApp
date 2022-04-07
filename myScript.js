@@ -9,18 +9,49 @@ const taskList = [
     },
 ]
 
-renderTasks = (taskList) => {
-
-    taskList.forEach((oneTask) => {
-        console.log("task", oneTask.text)
-        const task = document.createElement("p");
-        task.innerHTML = oneTask.text;
-        document.getElementById("taskList").appendChild(task);
-
-    })
-
+const filters = {
+    search: ''
 }
 
+// definition
+renderTasks = (taskList, filters) => {
 
+    let list = filterTasks(taskList, filters)
 
-renderTasks(taskList)
+    document.querySelector("#taskList").innerHTML = '';
+
+    list.forEach((oneTask, index) => {
+        const task = document.createElement('p');
+        task.innerHTML = index + 1 + ". " + oneTask.text;
+        document.getElementById('taskList').appendChild(task);
+    })
+}
+
+createTask = (text) => {
+    taskList.push({ 
+        text: text, 
+        done: false })
+    renderTasks(taskList, filters)
+}
+
+filterTasks = (taskList, filters) => {
+    return taskList.filter((oneTask)=>{
+        return oneTask.text.toLowerCase().includes(filters.search.toLowerCase());
+    })
+}
+
+//rendeer after open
+renderTasks(taskList, filters)
+
+// listeners
+document.querySelector('#createTastform').addEventListener('submit', (e) => {
+    e.preventDefault()
+    createTask(e.target.elements.task.value)
+    e.target.elements.task.value = ''
+})
+
+document.querySelector('#search').addEventListener('input', (e) => {
+    e.preventDefault()
+    filters.search = e.target.value
+    renderTasks(taskList, filters)
+})

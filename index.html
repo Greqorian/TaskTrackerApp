@@ -3,21 +3,31 @@
 
 <head>
     <title>Task Tracker</title>
-    
+
 </head>
 
 <body>
 
     <h2>Task Tracker</h2>
-    <p>Manage your To Do list</p>
+    <h4>Manage your To Do list</h4>
+    <label for="filter">Search:</label>
+    <input id="search" type="text" placeholder="search task" name="filter" />
     <hr />
 
     <div id="taskList">
-
+        <!-- Taks List inserction -->
+    </div>
+    <hr />
+    <div>
+        <form id="createTastform">
+            <label for="task">Task:</label>
+            <input type="text" placeholder="write task" name="task" />
+            <button id="createTask">Create Task</button>
+        </form>
 
     </div>
 
-<script src="myScript.js"></script>
+    <script src="myScript.js"></script>
 
 </body>
 
